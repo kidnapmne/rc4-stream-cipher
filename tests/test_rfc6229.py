@@ -32,7 +32,7 @@ class TestRFC6229(unittest.TestCase):
         self.assertEqual(actual, expected)
 
     def test_rfc6229_128bit_offset_0(self):
-            # Source: RFC 6229, Key length: 128 bits, DEC offset: 0
+            #Khoá 128 bits, offset: 0
             key = bytes.fromhex(
                 "0102030405060708090a0b0c0d0e0f10"
             )
