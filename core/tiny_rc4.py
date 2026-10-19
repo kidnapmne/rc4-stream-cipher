@@ -1,8 +1,6 @@
 def ksa(key, n=8, trace=False):
     """Giai đoạn khởi tạo và xáo trộn S-box (Key-Scheduling Algorithm - KSA).
 
-    Slide trang 54, 56-58.
-
     Tham số:
         key (list[int]): Khóa bí mật K gồm các số nguyên 3 bit (ví dụ: [2, 1,
         3]).
@@ -36,7 +34,7 @@ def ksa(key, n=8, trace=False):
         # Lưu lại j cũ và phần tử để in giải thích
         j_old = j
 
-        # Công thức slide trang 54: j = (j + S[i] + T[i]) mod N
+        # Công thức: j = (j + S[i] + T[i]) mod N
         j = (j + s[i] + t[i]) % n
 
         # Hoán đổi hai phần tử S[i] và S[j]
@@ -58,8 +56,6 @@ def ksa(key, n=8, trace=False):
 
 def prga(s, length, n=8, trace=False):
     """Giai đoạn sinh dòng khóa (Pseudo-Random Generation Algorithm - PRGA).
-
-    Slide trang 55, 59-60.
 
     Tham số:
         s (list[int]): Mảng hoán vị S thu được từ KSA.
@@ -168,13 +164,13 @@ def tiny_rc4(data, key, n=8, trace=False):
 
 
 if __name__ == "__main__":
-    # Chạy thử trực tiếp file này với đúng số liệu slide:
+    # Chạy thử trực tiếp file này với đúng ví dụ slide:
     # N = 8, K = [2, 1, 3], P = [1, 0, 6] (Từ "BAG" -> [001, 000, 110])
     N_SLIDE = 8
     K_SLIDE = [2, 1, 3]
     P_SLIDE = [1, 0, 6]
 
-    print(">>> CHẠY THỬ VỚI SỐ LIỆU SLIDE: P = [1, 0, 6] (BAG) <<<")
+    print(">>> CHẠY THỬ VỚI VÍ DỤ SLIDE: P = [1, 0, 6] (BAG) <<<")
     # Mã hóa
     cipher = tiny_rc4(P_SLIDE, K_SLIDE, n=N_SLIDE, trace=True)
     print(f"Bản mã C (thập phân): {cipher}")
