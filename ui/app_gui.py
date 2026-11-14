@@ -245,12 +245,33 @@ class RC4App:
                     result = bytes(result)
 
             action = "Giải mã file" if decrypt else "Mã hóa file"
-            suffix = ".dec" if decrypt else ".enc"
+            if decrypt:
+            # Kiểm tra file đầu vào có đuôi .enc hay không
+                if source.suffix.lower() != ".enc":
+                     raise ValueError("Vui lòng chọn file .enc để giải mã!")
 
-            destination = source.with_name(source.name + suffix)
+                # Bỏ đuôi .enc để lấy tên file gốc
+                original_path = source.with_suffix("")
+
+                # Thêm _giaima trước phần mở rộng gốc
+                destination = original_path.with_name(
+                    original_path.stem + "_giaima" + original_path.suffix
+                )
+
+            else:
+                # Mã hóa: giữ nguyên tên file và thêm .enc
+                destination = source.with_name(source.name + ".enc")
+
+            # Tránh ghi đè nếu file đã tồn tại
+            base_destination = destination
             counter = 1
+
             while destination.exists():
-                destination = source.with_name(source.name + suffix + f".{counter}")
+                destination = base_destination.with_name(
+                    base_destination.stem
+                    + f"_{counter}"
+                    + base_destination.suffix
+                )
                 counter += 1
 
             write_file(destination, result)
